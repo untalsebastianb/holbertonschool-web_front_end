@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login to the website</h1>
+    <input type="text" name="" placeholder="Firstname" id="firstname">
+    <input type="text" name="" placeholder="Email" id="email">
+    <button onclick="setCookies()">Log me in</button>
+    <h1>Cookies</h1>
+    <button onclick="showCookies()">Show the cookies</button>
+
+    <script>
+        const setCookies = _ => {
+            var d = new Date();
+            d.setTime(d.getTime() + (10*24*60*60*1000)); // 10 days expire (exdays*24*60*60*1000)) 
+            var expires = "expires="+ d.toUTCString();
+            let firstname = document.getElementById("firstname").value;
+            let email = document.getElementById("email").value;
+            document.cookie = `firsname=${firstname}; ${expires}; path=/`;
+            document.cookie = `email=${email}; ${expires}; path=/`;
+            document.getElementById('firstname').value = '';
+            document.getElementById('email').value = ''
+        };
+        const showCookies = _ => {
+            let cookies = document.cookie.split(";");
+            let v = [];
+            
+            // Ej: ["firstname=oscar", " email=oscar@gmail.com"]
+            for (let i in cookies) {
+                let cookie = cookies[i].split("=")[1];
+                v.push(cookie);
+            }
+            let p = document.createElement("p");
+            p.innerText = `Cookies: ${v[1]}, ${v[2]}`;
+            document.body.appendChild(p);
+        };
+    </script>
+</body>
+</html>
